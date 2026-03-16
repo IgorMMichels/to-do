@@ -1,11 +1,43 @@
 <script setup>
-  import { ref } from 'vue'
+import { ref } from 'vue'
 
-  const tarefas = ref(['tarefa 1', 'tarefa 2', 'tarefa 3']);
-  const novaTarefa = ref('');
+const tarefas = ref([
+  {
+    id: 1,
+    tarefa: 'Tarefa 1',
+    status: 'concluida',
+  },
+  {
+    id: 2,
+    tarefa: 'Tarefa 2',
+    status: 'concluida',
+  },
+  {
+    id: 3,
+    tarefa: 'Tarefa 3',
+    status: 'pendente',
+  },
+  {
+    id: 4,
+    tarefa: 'Tarefa 4',
+    status: 'pendente',
+  },
+])
+const novaTarefa = ref('')
 
-  // Concluir Tarefa
+function addTarefa(novaTarefa) {
+  const id = tarefas.value[tarefas.value.length - 1].id + 1
+  console.log(id)
+  tarefas.value.push({id: id, tarefa: novaTarefa, status: 'pendente'})
+}
+function editTarefa(id) {
+  const novoNome = prompt("Insira o novo nome da tarefa");
 
+  tarefas.value[id-1].tarefa = novoNome
+
+}
+
+// Concluir Tarefa
 </script>
 
 <template>
@@ -13,12 +45,12 @@
     <h1>Lista de Tarefas</h1>
     <ul>
       <li v-for="tarefa in tarefas" :key="tarefa">
-      {{ tarefa }} <button @click="tarefas.splice(tarefas.indexOf(tarefa), 1)">Edit</button> <button @click="tarefas.splice(tarefas.indexOf(tarefa), 1)">Delete</button>
-    </li>
+        {{ tarefa.tarefa }} <button @click="editTarefa(tarefa.id)">Edit</button>
+        <button @click="tarefas.splice(tarefas.indexOf(tarefa), 1)">Delete</button>
+      </li>
     </ul>
-    <input type="text" v-model="novaTarefa">
-    <button @click="tarefas.push(novaTarefa)">Adicionar</button>
-    <button @click="tarefas.sort(tarefas.value.sort())">Ordenar Tarefas</button>
+    <input type="text" v-model="novaTarefa" />
+    <button @click="addTarefa(novaTarefa)">Adicionar</button>
   </div>
 </template>
 
@@ -27,7 +59,7 @@ li {
   cursor: pointer;
 }
 .concluida {
-  color: lime
+  color: lime;
 }
 .container {
   padding: 15px;
