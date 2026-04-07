@@ -25,6 +25,8 @@ const tarefas = ref([
 ])
 const novaTarefa = ref('')
 
+import tarefaChild from './components/TarefaChild.vue'
+
 function addTarefa(novaTarefa) {
   let id = 1
   if (tarefas.value.length > 0) {
@@ -65,15 +67,18 @@ const pendentes = computed(() => {
     <input type="text" v-model="novaTarefa" />
     <button @click="addTarefa(novaTarefa)">Add</button>
     <ul>
-      <li
+      <tarefaChild
         v-for="tarefa in tarefasFiltradas"
         :key="tarefa"
-        @click="tarefa.status = tarefa.status === 'concluida' ? 'pendente' : 'concluida'"
+        @click="tarefa.status=tarefa.status === 'concluida' ? 'pendente' : 'concluida'"
         :class="{ concluida: tarefa.status == 'concluida' }"
+
+        :status="tarefa.status"
+        :nome="tarefa.tarefa"
       >
         {{ tarefa.tarefa }} <button @click="editTarefa(tarefa.id)">Edit</button>
         <button @click="tarefas.splice(tarefas.indexOf(tarefa), 1)">Del</button>
-      </li>
+      </tarefaChild>
       <p v-if="tarefasFiltradas.length == 0">Nenhum Resultado Encontrado</p>
     </ul>
     <input type="search" v-model="filtro" placeholder="Filtrar Tarefas...">
@@ -87,16 +92,11 @@ button {
   color: lime;
   background: none;
 }
-li {
-  cursor: pointer;
-}
+
 p {
   margin: 0;
 }
-.concluida {
-  text-decoration: line-through;
-  opacity: 50%;
-}
+
 .container {
   padding: 15px;
   height: 100%;

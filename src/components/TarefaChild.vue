@@ -1,22 +1,24 @@
 <script setup>
-  defineProps(['nome', 'basic', 'tipo'])
+  defineProps(['nome', 'status'])
+
 </script>
 
 <template>
-  <button :class="[basic, tipo]">
+  <li :class="[status]">
+    <slot>
 
-  </button>
+    </slot>
+  </li>
 </template>
 
 <style scoped>
-.btn {
-  color: lime;
-  background: none;
-}
-.tarefa {
+
+li {
   cursor: pointer;
 }
-p {
-  margin: 0;
+
+.concluida {
+  text-decoration: line-through;
+  opacity: 50%;
 }
 </style>
