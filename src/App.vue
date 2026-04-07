@@ -71,7 +71,6 @@ const pendentes = computed(() => {
         v-for="tarefa in tarefasFiltradas"
         :key="tarefa"
         @click="tarefa.status=tarefa.status === 'concluida' ? 'pendente' : 'concluida'"
-        :class="{ concluida: tarefa.status == 'concluida' }"
 
         :status="tarefa.status"
         :nome="tarefa.tarefa"
