@@ -26,6 +26,7 @@ const tarefas = ref([
 const novaTarefa = ref('')
 
 import tarefaChild from './components/TarefaChild.vue'
+import buttonChild from './components/ButtonChild.vue'
 
 function addTarefa(novaTarefa) {
   let id = 1
@@ -75,8 +76,8 @@ const pendentes = computed(() => {
         :status="tarefa.status"
         :nome="tarefa.tarefa"
       >
-        {{ tarefa.tarefa }} <button @click="editTarefa(tarefa.id)">Edit</button>
-        <button @click="tarefas.splice(tarefas.indexOf(tarefa), 1)">Del</button>
+        {{ tarefa.tarefa }} <buttonChild @click="editTarefa(tarefa.id)" :basic="'btn'">Edit</buttonChild>
+        <buttonChild @click="tarefas.splice(tarefas.indexOf(tarefa), 1)" :basic="'btn'">Del</buttonChild>
       </tarefaChild>
       <p v-if="tarefasFiltradas.length == 0">Nenhum Resultado Encontrado</p>
     </ul>
@@ -87,10 +88,6 @@ const pendentes = computed(() => {
 </template>
 
 <style scoped>
-button {
-  color: lime;
-  background: none;
-}
 
 p {
   margin: 0;
