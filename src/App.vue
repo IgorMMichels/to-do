@@ -66,7 +66,7 @@ const pendentes = computed(() => {
   <div class="container">
     <h1>Lista de Tarefas</h1>
     <input type="text" v-model="novaTarefa" />
-    <button @click="addTarefa(novaTarefa)">Add</button>
+    <buttonChild @click="addTarefa(novaTarefa)" :basic="'btn'">Add</buttonChild>
     <ul>
       <tarefaChild
         v-for="tarefa in tarefasFiltradas"
