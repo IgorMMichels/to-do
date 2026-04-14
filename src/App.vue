@@ -97,5 +97,14 @@ p {
   padding: 15px;
   height: 100%;
   border-radius: 15px;
+  background-color: black;
+}
+
+input {
+  background: white;
+  padding: 6px;
+  border: none;
+  font-size: 1rem;
+  border-radius: 6px;
 }
 </style>
